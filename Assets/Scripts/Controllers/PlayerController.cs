@@ -6,17 +6,16 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
-
     private Animator anim;
-
+    private CharacterStats characterStats;
     private GameObject attackTarget;
-
     private float lastAttackTime;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        characterStats = GetComponent<CharacterStats>();
     }
 
     private void Start()
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         agent.isStopped = false;
         transform.LookAt(attackTarget.transform);
-        while (Vector3.Distance(attackTarget.transform.position, transform.position) > 1)
+        while (Vector3.Distance(attackTarget.transform.position, transform.position) > characterStats.attackData.attackRange)
         {
             agent.destination = attackTarget.transform.position;
             yield return null;

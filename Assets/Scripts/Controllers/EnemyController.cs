@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private EnemyStates enemyState;
     private NavMeshAgent agent;
     private Animator anim;
+    private CharacterStats characterStats;
 
     [Header("Basic Settings")]
     public float sightRadius;
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private GameObject attackTatget;
     public float lookAtTime;
     private float remainLookAtTime;
+    private float lastAttackTime;
 
     [Header("Patrol State")]
     public float patrolRange;
@@ -32,6 +34,8 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        characterStats = GetComponent<CharacterStats>();
+
         speed = agent.speed;
         guardPos = transform.position;
         remainLookAtTime = lookAtTime;
@@ -54,6 +58,7 @@ public class EnemyController : MonoBehaviour
     {
         SwitchStates();
         SwitchAnimation();
+        lastAttackTime -= Time.deltaTime;
     }
 
     void SwitchAnimation()
@@ -61,6 +66,7 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("Walk", isWalk);
         anim.SetBool("Chase", isChase);
         anim.SetBool("Follow", isFollow);
+        anim.SetBool("Critical", characterStats.isCritical);
     }
 
     void SwitchStates()
@@ -129,7 +135,34 @@ public class EnemyController : MonoBehaviour
         else
         {
             isFollow = true;
+            agent.isStopped = false;
             agent.destination = attackTatget.transform.position;
+        }
+
+        if(TargetInAttackRange() || TargetInSkillRange())
+        {
+            isFollow = false;
+            agent.isStopped = true;
+            if(lastAttackTime < 0)
+            {
+                lastAttackTime = characterStats.attackData.coolDown;
+                //±©»÷ÅÐ¶Ï
+                characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
+                Attack();
+            }
+        }
+    }
+
+    void Attack()
+    {
+        transform.LookAt(attackTatget.transform);
+        if (TargetInAttackRange())
+        {
+            anim.SetTrigger("Attack");
+        }
+        if (TargetInSkillRange())
+        {
+            anim.SetTrigger("Skill");
         }
     }
 
@@ -146,6 +179,22 @@ public class EnemyController : MonoBehaviour
         }
         attackTatget = null;
         return false;
+    }
+
+    bool TargetInAttackRange()
+    {
+        if (attackTatget != null)
+            return Vector3.Distance(attackTatget.transform.position, transform.position) <= characterStats.attackData.attackRange;
+        else
+            return false;
+    }
+
+    bool TargetInSkillRange()
+    {
+        if (attackTatget != null)
+            return Vector3.Distance(attackTatget.transform.position, transform.position) <= characterStats.attackData.skillRange;
+        else
+            return false;
     }
 
     void GetNewWayPoint()

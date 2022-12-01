@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     bool isWalk;
     bool isChase;
     bool isFollow;
-    private GameObject attackTatget;
+    private GameObject attackTarget;
     public float lookAtTime;
     private float remainLookAtTime;
     private float lastAttackTime;
@@ -136,7 +136,7 @@ public class EnemyController : MonoBehaviour
         {
             isFollow = true;
             agent.isStopped = false;
-            agent.destination = attackTatget.transform.position;
+            agent.destination = attackTarget.transform.position;
         }
 
         if(TargetInAttackRange() || TargetInSkillRange())
@@ -155,7 +155,7 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
-        transform.LookAt(attackTatget.transform);
+        transform.LookAt(attackTarget.transform);
         if (TargetInAttackRange())
         {
             anim.SetTrigger("Attack");
@@ -173,26 +173,26 @@ public class EnemyController : MonoBehaviour
         {
             if (target.CompareTag("Player"))
             {
-                attackTatget = target.gameObject;
+                attackTarget = target.gameObject;
                 return true;
             }
         }
-        attackTatget = null;
+        attackTarget = null;
         return false;
     }
 
     bool TargetInAttackRange()
     {
-        if (attackTatget != null)
-            return Vector3.Distance(attackTatget.transform.position, transform.position) <= characterStats.attackData.attackRange;
+        if (attackTarget != null)
+            return Vector3.Distance(attackTarget.transform.position, transform.position) <= characterStats.attackData.attackRange;
         else
             return false;
     }
 
     bool TargetInSkillRange()
     {
-        if (attackTatget != null)
-            return Vector3.Distance(attackTatget.transform.position, transform.position) <= characterStats.attackData.skillRange;
+        if (attackTarget != null)
+            return Vector3.Distance(attackTarget.transform.position, transform.position) <= characterStats.attackData.skillRange;
         else
             return false;
     }
@@ -211,5 +211,15 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, sightRadius);
+    }
+
+    //Animation Event
+    void Hit()
+    {
+        if(attackTarget != null)
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>();
+            targetStats.TakeDamage(characterStats, targetStats);
+        }
     }
 }

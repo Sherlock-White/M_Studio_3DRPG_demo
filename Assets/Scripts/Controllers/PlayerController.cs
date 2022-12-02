@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     }
     public void EventAttack(GameObject target)
     {
+        if (isDead) return;
         if(target != null)
         {
             attackTarget = target;

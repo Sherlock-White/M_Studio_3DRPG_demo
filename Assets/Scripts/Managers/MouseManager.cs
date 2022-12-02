@@ -7,11 +7,8 @@ using System;
 //[System.Serializable]
 //public class EventVector3 : UnityEvent<Vector3> { }
 
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
-    //Singleton Pattern
-    public static MouseManager Instance;
-    
     RaycastHit hitInfo;
     
     //public EventVector3 OnMouseClicked;
@@ -21,11 +18,10 @@ public class MouseManager : MonoBehaviour
 
     public Texture2D point, doorway, attack, target, arrow;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-            Destroy(gameObject);
-        Instance = this;
+        base.Awake();
+        //DontDestroyOnLoad(this);
     }
 
     private void Update()

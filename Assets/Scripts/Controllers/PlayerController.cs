@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private CharacterStats characterStats;
     private GameObject attackTarget;
     private float lastAttackTime;
+    private bool isDead;
 
     private void Awake()
     {
@@ -26,12 +27,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        isDead = (characterStats.CurrentHealth == 0);
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
     }
     public void SwitchAnimation()
     {
         anim.SetFloat("Speed", agent.velocity.sqrMagnitude);
+        anim.SetBool("Death", isDead);
     }
     public void MoveToTarget(Vector3 target)
     {

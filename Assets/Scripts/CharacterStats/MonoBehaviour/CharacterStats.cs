@@ -39,9 +39,14 @@ public class CharacterStats : MonoBehaviour
         //防止出现负数伤害
         int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence,0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+        if (isCritical)
+        {
+            defender.GetComponent<Animator>().SetTrigger("Hit");
+        }
         //TODO: Update UI
         //TODO: 经验update
     }
+
     private int CurrentDamage()
     {
         float coreDamage = UnityEngine.Random.Range(attackData.minDanger, attackData.maxDanger);

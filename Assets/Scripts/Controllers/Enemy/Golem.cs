@@ -7,7 +7,10 @@ public class Golem : EnemyController
 {
     [Header("Skill")]
     public float kickForce = 25;
+    public GameObject rockPrefab;
+    public Transform handPos;
 
+    //Animation Event
     public void KickOff()
     {
         if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
@@ -22,6 +25,18 @@ public class Golem : EnemyController
             targetStats.GetComponent<NavMeshAgent>().velocity = direction * kickForce;
             targetStats.TakeDamage(characterStats, targetStats);
             targetStats.GetComponent<Animator>().SetTrigger("Dizzy");
+        }
+    }
+
+    //Animation Event
+    public void ThrowRock()
+    {
+        if(attackTarget != null)
+        {
+            //第三个参数是初始角度，我们选择维持原来的角度
+            var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
+            rock.GetComponent<Rock>().target = attackTarget;
+
         }
     }
 }

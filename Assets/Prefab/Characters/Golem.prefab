@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 2383284422701530894}
   - component: {fileID: 2383284422701530895}
   - component: {fileID: 2383284422701530888}
+  - component: {fileID: 1104916996339588306}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -469,6 +470,7 @@ Transform:
   m_Children:
   - {fileID: 2383284422482701870}
   - {fileID: 2383284423962431246}
+  - {fileID: 1593299709240311049}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.744, y: -181.711, z: 3.365}
@@ -521,6 +523,8 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 0
   kickForce: 25
+  rockPrefab: {fileID: 0}
+  handPos: {fileID: 0}
 --- !u!114 &2383284422701530895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +563,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1104916996339588306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383284423776770169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66218a89c2f33340ad403d2890db858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 4013009051902344541, guid: 924ef8d48f501ac4bb74b740757c45e4, type: 3}
+  barPoint: {fileID: 1593299709240311049}
+  alwaysVisible: 0
+  visibleTime: 3
 --- !u!1 &2383284423903295794
 GameObject:
   m_ObjectHideFlags: 0
@@ -7236,4 +7256,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2383284422407070672}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8666490617645748101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593299709240311049}
+  m_Layer: 0
+  m_Name: healthBarPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593299709240311049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666490617645748101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 4.9, z: -0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2383284423776770171}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

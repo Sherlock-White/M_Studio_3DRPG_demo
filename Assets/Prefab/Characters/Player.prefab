@@ -1847,6 +1847,7 @@ GameObject:
   - component: {fileID: 7836759630746870308}
   - component: {fileID: 7836759630746870311}
   - component: {fileID: 454504142}
+  - component: {fileID: 8976142334699396386}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1868,6 +1869,7 @@ Transform:
   - {fileID: 8101645934908261606}
   - {fileID: 8101645934908261640}
   - {fileID: 7836759630160120101}
+  - {fileID: 6844499913297393261}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1938,6 +1940,22 @@ CapsuleCollider:
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &8976142334699396386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8101645934908561716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66218a89c2f33340ad403d2890db858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 4013009051902344541, guid: 924ef8d48f501ac4bb74b740757c45e4, type: 3}
+  barPoint: {fileID: 6844499913297393261}
+  alwaysVisible: 0
+  visibleTime: 0
 --- !u!1 &8101645934908561718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,4 +2573,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8101645934908261754}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8156513156835202904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6844499913297393261}
+  m_Layer: 6
+  m_Name: healthBarPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6844499913297393261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156513156835202904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.813, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8101645934908261716}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

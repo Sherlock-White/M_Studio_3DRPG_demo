@@ -21,11 +21,24 @@ public class PlayerController : MonoBehaviour
         stopDistance = agent.stoppingDistance;
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        //if (!MouseManager.IsInitialized) return;
+        //BUG：因为MouseManager未加载完毕会报空
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
+    }
+
+    private void Start()
+    {
         GameManager.Instance.RigisterPlayer(characterStats);
+    }
+
+    private void OnDisable()
+    {
+        if (!MouseManager.IsInitialized) return;
+        MouseManager.Instance.OnMouseClicked -= MoveToTarget;
+        MouseManager.Instance.OnEnemyClicked -= EventAttack;
     }
 
     private void Update()

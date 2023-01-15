@@ -7,8 +7,15 @@ using UnityEngine.AI;
 
 public class SceneController : Singleton<SceneController>
 {
+    public GameObject playerPrefab;
     GameObject player;
     NavMeshAgent playerAgent;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
 
     public void TransitionToDestination(TransitionPoint transitionPoint)
     {
@@ -18,20 +25,32 @@ public class SceneController : Singleton<SceneController>
                 StartCoroutine(Transition(SceneManager.GetActiveScene().name, transitionPoint.destinationTag));
                 break;
             case TransitionPoint.TransitionType.DifferentScene:
-
+                StartCoroutine(Transition(transitionPoint.sceneName, transitionPoint.destinationTag));
                 break;
         }
     }
 
     IEnumerator Transition(string sceneName,TransitionDestination.DestinationTag destinationTag)
     {
-        player = GameManager.Instance.playerStats.gameObject;
-        playerAgent = player.GetComponent<NavMeshAgent>();
-        playerAgent.enabled = false;
-        TransitionDestination targetDestination = GetDestination(destinationTag);
-        player.transform.SetPositionAndRotation(targetDestination.transform.position, targetDestination.transform.rotation);
-        playerAgent.enabled = true;
-        yield return null;
+        //TODO:保存数据
+        if (SceneManager.GetActiveScene().name != sceneName)
+        {
+            yield return SceneManager.LoadSceneAsync(sceneName);
+            //BUG: 人物复制失败
+            TransitionDestination targetDestination = GetDestination(destinationTag);
+            yield return Instantiate(playerPrefab, targetDestination.transform.position, targetDestination.transform.rotation);
+            yield break;
+        }
+        else
+        {
+            TransitionDestination targetDestination = GetDestination(destinationTag);
+            player = GameManager.Instance.playerStats.gameObject;
+            playerAgent = player.GetComponent<NavMeshAgent>();
+            playerAgent.enabled = false;
+            player.transform.SetPositionAndRotation(targetDestination.transform.position, targetDestination.transform.rotation);
+            playerAgent.enabled = true;
+            yield return null;
+        }
     }
 
     private TransitionDestination GetDestination(TransitionDestination.DestinationTag destinationTag)

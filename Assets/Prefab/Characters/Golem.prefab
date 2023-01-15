@@ -464,7 +464,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2383284423776770169}
-  m_LocalRotation: {x: -0.029455109, y: -0.9994335, z: 0.0060537914, w: -0.015112464}
+  m_LocalRotation: {x: -0.029453972, y: -0.99943364, z: 0.006050703, w: -0.015114521}
   m_LocalPosition: {x: 7.3507404, y: 2, z: 16.022732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -523,8 +523,8 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 0
   kickForce: 25
-  rockPrefab: {fileID: 0}
-  handPos: {fileID: 0}
+  rockPrefab: {fileID: 3305165179910328746, guid: aa8c10311c6c5694088c4c050ee4266c, type: 3}
+  handPos: {fileID: 2383284424032217885}
 --- !u!114 &2383284422701530895
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,5 +9,5 @@ public class TransitionDestination : MonoBehaviour
         ENTER,A,B,C
     }
 
-    public DestinationTag transitionType;
+    public DestinationTag destinationTag;
 }

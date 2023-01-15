@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd1919d28100d24c9cf9686be8300d2, type: 3}
   m_Name: playerData
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  maxHealth: 110
-  currentHealth: 67
+  maxHealth: 100
+  currentHealth: 100
   baseDefence: 5
   currentDefence: 2
   killPoint: 0
-  currentLevel: 2
+  currentLevel: 1
   maxLevel: 30
-  baseExp: 63
-  currentExp: 55
+  baseExp: 100
+  currentExp: 0
   levelBuff: 0.1

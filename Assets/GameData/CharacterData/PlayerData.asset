@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Character
   maxHealth: 100
   currentHealth: 100
-  baseDefence: 5
+  baseDefence: 2
   currentDefence: 2
   killPoint: 0
   currentLevel: 1
   maxLevel: 30
-  baseExp: 100
+  baseExp: 50
   currentExp: 0
   levelBuff: 0.1

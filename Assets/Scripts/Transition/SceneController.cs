@@ -32,13 +32,14 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator Transition(string sceneName,TransitionDestination.DestinationTag destinationTag)
     {
-        //TODO:保存数据
+        SaveManager.Instance.SavePlayerData();
+
         if (SceneManager.GetActiveScene().name != sceneName)
         {
             yield return SceneManager.LoadSceneAsync(sceneName);
-            //BUG: 人物复制失败
             TransitionDestination targetDestination = GetDestination(destinationTag);
             yield return Instantiate(playerPrefab, targetDestination.transform.position, targetDestination.transform.rotation);
+            SaveManager.Instance.LoadPlayerData();
             yield break;
         }
         else

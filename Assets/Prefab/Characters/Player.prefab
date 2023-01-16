@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 8867141860863450370}
   - component: {fileID: 8867141860863450371}
   m_Layer: 6
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,8 +624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bfa429287538bc43a1cac37ac524b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateData: {fileID: 0}
-  characterData: {fileID: 11400000, guid: 3313f209bba27f240aae4b1923922b03, type: 2}
+  templateData: {fileID: 11400000, guid: 3313f209bba27f240aae4b1923922b03, type: 2}
+  characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 92ebff598a59e4843a8dd0344ff71c6c, type: 2}
   isCritical: 0
 --- !u!1 &7467388040996348579

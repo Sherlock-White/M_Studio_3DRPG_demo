@@ -64,4 +64,36 @@ public class SceneController : Singleton<SceneController>
         }
         return null;
     }
+
+    public void TransitionToMain()
+    {
+        StartCoroutine(LoadMain());
+    }
+
+    public void TransitionToLoadGame()
+    {
+        StartCoroutine(LoadLevel(SaveManager.Instance.SceneName));
+    }
+
+    public void TransitionToFirstLevel()
+    {
+        StartCoroutine(LoadLevel("Forest"));
+    }
+
+    IEnumerator LoadLevel(string scene)
+    {
+        if(scene != "")
+        {
+            yield return SceneManager.LoadSceneAsync(scene);
+            yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
+            SaveManager.Instance.SavePlayerData();
+            yield break;
+        }
+    }
+
+    IEnumerator LoadMain()
+    {
+        yield return SceneManager.LoadSceneAsync("Main");
+        yield break;
+    }
 }

@@ -23,15 +23,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        //if (!MouseManager.IsInitialized) return;
-        //BUG：因为MouseManager未加载完毕会报空
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
+        GameManager.Instance.RigisterPlayer(characterStats);
     }
 
     private void Start()
     {
-        GameManager.Instance.RigisterPlayer(characterStats);
+        SaveManager.Instance.LoadPlayerData();
     }
 
     private void OnDisable()

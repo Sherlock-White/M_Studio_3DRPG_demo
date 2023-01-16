@@ -1,9 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    string sceneName = "sceneName";
+
+    public string SceneName
+    {
+        get { return PlayerPrefs.GetString(sceneName); }
+    }
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -12,6 +21,10 @@ public class SaveManager : Singleton<SaveManager>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneController.Instance.TransitionToMain();
+        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             SavePlayerData();
@@ -39,6 +52,7 @@ public class SaveManager : Singleton<SaveManager>
         var jsonData = JsonUtility.ToJson(data,true);
         //convert json to string and save to disk
         PlayerPrefs.SetString(key, jsonData);
+        PlayerPrefs.SetString(sceneName, SceneManager.GetActiveScene().name);
         PlayerPrefs.Save();
     }
 

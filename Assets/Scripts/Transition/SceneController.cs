@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
 
-public class SceneController : Singleton<SceneController>
+public class SceneController : Singleton<SceneController>,IEndGameObserver
 {
     public GameObject playerPrefab;
+    public SceneFader sceneFaderPrefab;
+    bool fadeFinished;
     GameObject player;
     NavMeshAgent playerAgent;
 
@@ -15,6 +17,12 @@ public class SceneController : Singleton<SceneController>
     {
         base.Awake();
         DontDestroyOnLoad(this);
+    }
+    
+    void Start()
+    {
+        GameManager.Instance.AddObserver(this);
+        fadeFinished = true;
     }
 
     public void TransitionToDestination(TransitionPoint transitionPoint)
@@ -36,6 +44,7 @@ public class SceneController : Singleton<SceneController>
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
+            //FIXME:可以加入Fader
             yield return SceneManager.LoadSceneAsync(sceneName);
             TransitionDestination targetDestination = GetDestination(destinationTag);
             yield return Instantiate(playerPrefab, targetDestination.transform.position, targetDestination.transform.rotation);
@@ -82,18 +91,34 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator LoadLevel(string scene)
     {
+        SceneFader fade = Instantiate(sceneFaderPrefab);
         if(scene != "")
         {
+            yield return StartCoroutine(fade.FadeOut(2f));
             yield return SceneManager.LoadSceneAsync(scene);
             yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
+            
             SaveManager.Instance.SavePlayerData();
+            yield return StartCoroutine(fade.FadeIn(2f));
             yield break;
         }
     }
 
     IEnumerator LoadMain()
     {
+        SceneFader fade = Instantiate(sceneFaderPrefab);
+        yield return StartCoroutine(fade.FadeOut(2f));
         yield return SceneManager.LoadSceneAsync("Main");
+        yield return StartCoroutine(fade.FadeIn(2f));
         yield break;
+    }
+
+    public void EndNotify()
+    {
+        if (fadeFinished)
+        {
+            fadeFinished = false;
+            StartCoroutine(LoadMain());
+        }
     }
 }

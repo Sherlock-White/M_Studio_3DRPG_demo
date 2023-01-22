@@ -15,7 +15,7 @@ public class ItemData_SO : ScriptableObject
     [TextArea]
     public string description;
 
-    public bool starkable;  //是否可堆叠
+    public bool stackable;  //是否可堆叠
 
     [Header("Weapon")]
     public GameObject weaponPrefab;

@@ -19,3 +19,4 @@ MonoBehaviour:
   description: "\u8FD9\u662F\u4E00\u628A\u666E\u901A\u7684\u65E0\u950B\u5251\uFF01"
   starkable: 0
   weaponPrefab: {fileID: 4645777789878597216, guid: f6fa16ae7ee597a458c62bdf3f20e5a6, type: 3}
+  weaponData: {fileID: 11400000, guid: 9b41ca092a1a50a4fa775bd73c123e1f, type: 2}

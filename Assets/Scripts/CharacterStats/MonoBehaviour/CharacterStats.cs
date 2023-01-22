@@ -9,6 +9,10 @@ public class CharacterStats : MonoBehaviour
     public CharacterData_SO templateData;
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
+
+    [Header("Weapon")]
+    public Transform weaponSlot;
+
     [HideInInspector]
     public bool isCritical;
 
@@ -41,7 +45,7 @@ public class CharacterStats : MonoBehaviour
     }
     #endregion
 
-    #region Charater Combat
+    #region Character Combat
     public void TakeDamage(CharacterStats attacker,CharacterStats defender)
     {
         //防止出现负数伤害
@@ -79,4 +83,17 @@ public class CharacterStats : MonoBehaviour
         return (int)coreDamage;
     }
     #endregion
+
+    #region Equip Weapon
+    public void EquipWeapon(ItemData_SO weapon)
+    {
+        if(weapon.weaponPrefab != null)
+        {
+            Instantiate(weapon.weaponPrefab,weaponSlot);
+        }
+        //更新属性
+        attackData.ApplyWeaponData(weapon.weaponData);
+    }
+    #endregion
+
 }

@@ -13,6 +13,7 @@ public class ItemPickUp : MonoBehaviour
             //TODO: 将物品添加到背包
 
             //装备武器
+            GameManager.Instance.playerStats.EquipWeapon(itemData);
             Destroy(gameObject);
         }
     }

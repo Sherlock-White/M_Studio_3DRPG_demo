@@ -13,4 +13,15 @@ public class AttackData_SO : ScriptableObject
     public int maxDanger;
     public float criticalMultiplier;
     public float criticalChance;
+
+    public void ApplyWeaponData(AttackData_SO weapon)
+    {
+        attackRange = weapon.attackRange;
+        skillRange = weapon.skillRange;
+        coolDown = weapon.coolDown;
+        minDanger = weapon.minDanger;
+        maxDanger = weapon.maxDanger;
+        criticalMultiplier = weapon.criticalMultiplier;
+        criticalChance = weapon.criticalChance;
+    }
 }

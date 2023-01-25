@@ -11,6 +11,7 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             InventoryManager.Instance.inventoryData.AddItem(itemData, itemData.itemAmount);
+            InventoryManager.Instance.inventoryUI.RefreshUI();
             //×°±¸ÎäÆ÷
             //GameManager.Instance.playerStats.EquipWeapon(itemData);
             Destroy(gameObject);

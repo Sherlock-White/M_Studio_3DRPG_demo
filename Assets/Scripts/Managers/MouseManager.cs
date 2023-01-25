@@ -13,7 +13,6 @@ public class MouseManager : Singleton<MouseManager>
     
     //public EventVector3 OnMouseClicked;
     public event Action<Vector3> OnMouseClicked;
-
     public event Action<GameObject> OnEnemyClicked;
 
     public Texture2D point, doorway, attack, target, arrow;

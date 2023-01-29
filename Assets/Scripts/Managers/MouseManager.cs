@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-//using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 //[System.Serializable]
 //public class EventVector3 : UnityEvent<Vector3> { }
@@ -31,6 +31,12 @@ public class MouseManager : Singleton<MouseManager>
 
     void SetCursorTexture()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray,out hitInfo))
         {
@@ -57,6 +63,7 @@ public class MouseManager : Singleton<MouseManager>
     }
     void MouseControl()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         if (Input.GetMouseButtonDown(0) && hitInfo.collider != null)
         {
             if (hitInfo.collider.gameObject.CompareTag("Ground"))

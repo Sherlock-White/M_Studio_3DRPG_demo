@@ -35,5 +35,55 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         //放下物品 交换数据
+        //是否指向UI物品
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            if(InventoryManager.Instance.CheckInActionUI(eventData.position) ||
+                InventoryManager.Instance.CheckInEquipmentUI(eventData.position)||
+                InventoryManager.Instance.CheckInInventoryUI(eventData.position))
+            {
+                //判断鼠标指针进入的对象是否包含SlotHolder
+                if (eventData.pointerEnter.gameObject.GetComponent<SlotHolder>())
+                    targetHolder = eventData.pointerEnter.gameObject.GetComponent<SlotHolder>();
+                else
+                    targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();
+                switch (targetHolder.slotType)
+                {
+                    case SlotType.BAG:
+                        SwapItem();
+                        break;
+                    case SlotType.ACTION:
+                        break;
+                    case SlotType.ARMOR:
+                        break;
+                    case SlotType.WEAPON:
+                        break;
+                }
+                currentHolder.UpdateItem();
+                targetHolder.UpdateItem();
+            }
+        }
+        transform.SetParent(InventoryManager.Instance.currentDrag.originalParent);
+        RectTransform t = transform as RectTransform;
+        t.offsetMax = -Vector2.one * 5;
+        t.offsetMin = Vector2.one * 5;
+    }
+
+    public void SwapItem()
+    {
+        var targetItem = targetHolder.itemUI.Bag.items[targetHolder.itemUI.Index];
+        var tempItem = currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index];
+        bool isSameItem = tempItem.itemData == targetItem.itemData;
+        if(isSameItem && targetItem.itemData.stackable)
+        {
+            targetItem.amount += tempItem.amount;
+            tempItem.itemData = null;
+            tempItem.amount = 0;
+        }
+        else
+        {
+            currentHolder.itemUI.Bag.items[currentHolder.itemUI.Index] = targetItem;
+            targetHolder.itemUI.Bag.items[targetHolder.itemUI.Index] = tempItem;
+        }
     }
 }

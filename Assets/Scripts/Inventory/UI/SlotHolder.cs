@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SlotTyope { BAG,WEAPON,ARMOR, ACTION }
+public enum SlotType { BAG,WEAPON,ARMOR, ACTION }
 public class SlotHolder : MonoBehaviour
 {
-    public SlotTyope slotTyope;
+    public SlotType slotType;
     public ItemUI itemUI;
 
     public void UpdateItem()
     {
-        switch (slotTyope)
+        switch (slotType)
         {
-            case SlotTyope.BAG:
+            case SlotType.BAG:
                 itemUI.Bag = InventoryManager.Instance.inventoryData;
                 break;
-            case SlotTyope.WEAPON:
+            case SlotType.WEAPON:
 
                 break;
-            case SlotTyope.ARMOR:
+            case SlotType.ARMOR:
 
                 break;
-            case SlotTyope.ACTION:
+            case SlotType.ACTION:
 
                 break;
         }

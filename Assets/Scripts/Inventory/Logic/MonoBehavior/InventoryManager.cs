@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
@@ -29,6 +30,10 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject statsPanel;
     bool isOpen = false;
 
+    [Header("Stats Text")]
+    public Text healthText;
+    public Text attackText;
+
     private void Start()
     {
         inventoryUI.RefreshUI();
@@ -44,6 +49,14 @@ public class InventoryManager : Singleton<InventoryManager>
             bagPanel.SetActive(isOpen);
             statsPanel.SetActive(isOpen);
         }
+        UpdateStatsText(GameManager.Instance.playerStats.MaxHealth, GameManager.Instance.playerStats.attackData.minDamage,
+            GameManager.Instance.playerStats.attackData.maxDamage);
+    }
+
+    public void UpdateStatsText(int health,int min,int max)
+    {
+        healthText.text = health.ToString();
+        attackText.text = min + "-" + max;
     }
 
     #region 检查拖拽物品是否在每一个Slot范围内

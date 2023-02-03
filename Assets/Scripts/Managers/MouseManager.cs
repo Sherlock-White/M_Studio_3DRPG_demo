@@ -78,6 +78,6 @@ public class MouseManager : Singleton<MouseManager>
 
     bool InteractWithUI()
     {
-        return (EventSystem.current != null & EventSystem.current.IsPointerOverGameObject());
+        return (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject());
     }
 }

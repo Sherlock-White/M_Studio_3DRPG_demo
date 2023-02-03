@@ -77,7 +77,7 @@ public class CharacterStats : MonoBehaviour
 
     private int CurrentDamage()
     {
-        float coreDamage = UnityEngine.Random.Range(attackData.minDanger, attackData.maxDanger);
+        float coreDamage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
         if (isCritical)
         {
             coreDamage *= attackData.criticalMultiplier;

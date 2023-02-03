@@ -16,13 +16,23 @@ public class SlotHolder : MonoBehaviour
                 itemUI.Bag = InventoryManager.Instance.inventoryData;
                 break;
             case SlotType.WEAPON:
-
+                itemUI.Bag = InventoryManager.Instance.equipmentData;
+                //切换武器
+                if(itemUI.Bag.items[itemUI.Index].itemData != null)
+                {
+                    GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].itemData);
+                }
+                else
+                {
+                    //目前的设计中不会执行到这一部分
+                    GameManager.Instance.playerStats.UnEquipWeapon();
+                }
                 break;
             case SlotType.ARMOR:
-
+                itemUI.Bag = InventoryManager.Instance.equipmentData;
                 break;
             case SlotType.ACTION:
-
+                itemUI.Bag = InventoryManager.Instance.actionData;
                 break;
         }
         var item = itemUI.Bag.items[itemUI.Index];

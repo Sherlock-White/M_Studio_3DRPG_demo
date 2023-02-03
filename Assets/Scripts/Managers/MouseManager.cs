@@ -4,9 +4,6 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 
-//[System.Serializable]
-//public class EventVector3 : UnityEvent<Vector3> { }
-
 public class MouseManager : Singleton<MouseManager>
 {
     RaycastHit hitInfo;
@@ -31,7 +28,7 @@ public class MouseManager : Singleton<MouseManager>
 
     void SetCursorTexture()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (InteractWithUI())
         {
             Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
             return;
@@ -63,7 +60,7 @@ public class MouseManager : Singleton<MouseManager>
     }
     void MouseControl()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (InteractWithUI()) return;
         if (Input.GetMouseButtonDown(0) && hitInfo.collider != null)
         {
             if (hitInfo.collider.gameObject.CompareTag("Ground"))
@@ -77,5 +74,10 @@ public class MouseManager : Singleton<MouseManager>
             if (hitInfo.collider.gameObject.CompareTag("Item"))
                 OnMouseClicked?.Invoke(hitInfo.point);
         }
+    }
+
+    bool InteractWithUI()
+    {
+        return (EventSystem.current != null & EventSystem.current.IsPointerOverGameObject());
     }
 }

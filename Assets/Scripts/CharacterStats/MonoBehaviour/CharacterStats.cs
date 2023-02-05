@@ -10,6 +10,7 @@ public class CharacterStats : MonoBehaviour
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
     private AttackData_SO baseAttackData;
+    private RuntimeAnimatorController baseAnimator;
 
     [Header("Weapon")]
     public Transform weaponSlot;
@@ -23,6 +24,7 @@ public class CharacterStats : MonoBehaviour
             characterData = Instantiate(templateData);
 
         baseAttackData = Instantiate(attackData);
+        baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
     }
 
     #region Read from Data_SO
@@ -101,9 +103,8 @@ public class CharacterStats : MonoBehaviour
         {
             Instantiate(weapon.weaponPrefab,weaponSlot);
         }
-        //TODO：更新属性
-        //TODO：切换动画
         attackData.ApplyWeaponData(weapon.weaponData);
+        GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
     }
 
     public void UnEquipWeapon()
@@ -117,6 +118,7 @@ public class CharacterStats : MonoBehaviour
         }
         attackData.ApplyWeaponData(baseAttackData);
         //TODO：切换动画
+        GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
     }
 
     #endregion

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Sword
+  itemName: "\u65E0\u950B\u5251"
   itemIcon: {fileID: 21300000, guid: d1706d99f9a2af041b3f3caff26435d3, type: 3}
   itemAmount: 1
   description: "\u8FD9\u662F\u4E00\u628A\u666E\u901A\u7684\u65E0\u950B\u5251\uFF01"

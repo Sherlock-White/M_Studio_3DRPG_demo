@@ -20,7 +20,6 @@ public class TransitionPoint : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && canTrans)
         {
-            //TODO: SceneController´«ËÍ
             SceneController.Instance.TransitionToDestination(this);
         }
     }

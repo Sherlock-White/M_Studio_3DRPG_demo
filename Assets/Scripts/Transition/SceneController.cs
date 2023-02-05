@@ -41,6 +41,7 @@ public class SceneController : Singleton<SceneController>,IEndGameObserver
     IEnumerator Transition(string sceneName,TransitionDestination.DestinationTag destinationTag)
     {
         SaveManager.Instance.SavePlayerData();
+        InventoryManager.Instance.SaveData();
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
@@ -99,7 +100,8 @@ public class SceneController : Singleton<SceneController>,IEndGameObserver
             yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
             
             SaveManager.Instance.SavePlayerData();
-            yield return StartCoroutine(fade.FadeIn(2f));
+            InventoryManager.Instance.SaveData();
+            yield return StartCoroutine(fade.FadeIn(1f));
             yield break;
         }
     }
@@ -107,9 +109,9 @@ public class SceneController : Singleton<SceneController>,IEndGameObserver
     IEnumerator LoadMain()
     {
         SceneFader fade = Instantiate(sceneFaderPrefab);
-        yield return StartCoroutine(fade.FadeOut(2f));
+        yield return StartCoroutine(fade.FadeOut(1f));
         yield return SceneManager.LoadSceneAsync("Main");
-        yield return StartCoroutine(fade.FadeIn(2f));
+        yield return StartCoroutine(fade.FadeIn(1f));
         yield break;
     }
 

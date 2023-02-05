@@ -47,24 +47,26 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     targetHolder = eventData.pointerEnter.gameObject.GetComponent<SlotHolder>();
                 else
                     targetHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();
-                switch (targetHolder.slotType)
-                {
-                    case SlotType.BAG:
-                        SwapItem();
-                        break;
-                    case SlotType.ACTION:
-                        if(currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Useable)
+
+                if(targetHolder != InventoryManager.Instance.currentDrag.originalHolder)
+                    switch (targetHolder.slotType)
+                    {
+                        case SlotType.BAG:
                             SwapItem();
-                        break;
-                    case SlotType.ARMOR:
-                        if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Armor)
-                            SwapItem();
-                        break;
-                    case SlotType.WEAPON:
-                        if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Weapon)
-                            SwapItem();
-                        break;
-                }
+                            break;
+                        case SlotType.ACTION:
+                            if(currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Useable)
+                                SwapItem();
+                            break;
+                        case SlotType.ARMOR:
+                            if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Armor)
+                                SwapItem();
+                            break;
+                        case SlotType.WEAPON:
+                            if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Weapon)
+                                SwapItem();
+                            break;
+                    }
                 currentHolder.UpdateItem();
                 targetHolder.UpdateItem();
             }

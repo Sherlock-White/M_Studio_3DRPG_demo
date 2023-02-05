@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 2383284422701530895}
   - component: {fileID: 2383284422701530888}
   - component: {fileID: 1104916996339588306}
+  - component: {fileID: -617046779999281597}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -540,6 +541,7 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: e5480d8f57059b04cab9749b0d893972, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: f7038352b797d2f46b1d88fb84750795, type: 2}
+  weaponSlot: {fileID: 0}
   isCritical: 0
 --- !u!195 &2383284422701530888
 NavMeshAgent:
@@ -579,6 +581,21 @@ MonoBehaviour:
   barPoint: {fileID: 1593299709240311049}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &-617046779999281597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383284423776770169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ea9a604b22c3e4d9678234f1c3c99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - item: {fileID: 1591638071541320344, guid: 408b770e3da9d1440bf99ae16b98c88a, type: 3}
+    weight: 0.3
 --- !u!1 &2383284423903295794
 GameObject:
   m_ObjectHideFlags: 0

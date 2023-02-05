@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 3079533227469414418}
   - component: {fileID: 77082421896990025}
   - component: {fileID: 1090218803372802}
+  - component: {fileID: 9146108986550803264}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -542,7 +543,25 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: f2280bda823825940b3ba84f88d29746, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 1efab4c39c4b5ad47b16df5878c91b5d, type: 2}
+  weaponSlot: {fileID: 0}
   isCritical: 0
+--- !u!114 &9146108986550803264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3080300154807582876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ea9a604b22c3e4d9678234f1c3c99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - item: {fileID: 1045674145104072625, guid: a2b92027e2fcff842a3caad377d98c61, type: 3}
+    weight: 0.3
+  - item: {fileID: 5600092394573691905, guid: 7bd3d469b9208aa4a8dcfe5c2c9936de, type: 3}
+    weight: 0.4
 --- !u!1 &3477839270305482372
 GameObject:
   m_ObjectHideFlags: 0

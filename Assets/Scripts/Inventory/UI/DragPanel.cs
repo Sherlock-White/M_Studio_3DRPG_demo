@@ -21,6 +21,7 @@ public class DragPanel : MonoBehaviour, IDragHandler,IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        //使得当前选择的面板始终在最前面（但注意不能挡住DragCanvas）
         rectTransform.SetSiblingIndex(2);
     }
 }

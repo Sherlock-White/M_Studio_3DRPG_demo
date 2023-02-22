@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1567452355708714258}
   - component: {fileID: 1567452355708714259}
   m_Layer: 0
-  m_Name: Excalibur_eq
+  m_Name: Excalibur_origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

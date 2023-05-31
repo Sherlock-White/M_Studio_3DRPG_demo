@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d7976ec2f5534468ceb30a2cee18c3, type: 3}
+  m_Name: Excalibur
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: "\u8A93\u7EA6\u80DC\u5229\u4E4B\u5251"
+  itemIcon: {fileID: 21300000, guid: 964d27412306a5048b269d24b9df1198, type: 3}
+  itemAmount: 1
+  description: "\u4F20\u8BF4\u4E2D\u4E9A\u745F\u738B\u4ECE\u6E56\u4E4B\u4ED9\u5973\u90A3\u5F97\u5230\u7684\u5723\u5251\u3002"
+  stackable: 0
+  useableItemData: {fileID: 0}
+  weaponPrefab: {fileID: 1903753671765262916, guid: ad6ace2de78a69348ae1ec5b30a376ca, type: 3}
+  weaponData: {fileID: 11400000, guid: 66362a73fb739694d98d2315e762f4b5, type: 2}
+  weaponAnimator: {fileID: 22100000, guid: aad95839220c026498052407d806ee9e, type: 2}

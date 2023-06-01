@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyStates {GUARD,PATROL,CHASE,DEAD }
+public enum EnemyStates {
+    GUARD,
+    PATROL,
+    CHASE,
+    DEAD,
+    DUMMY,
+}
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterStats))]
-public class EnemyController : MonoBehaviour,IEndGameObserver
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private EnemyStates enemyState;
     private NavMeshAgent agent;
@@ -18,6 +24,7 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
 
     [Header("Basic Settings")]
     public float sightRadius;
+    public bool isDummy;
     public bool isGuard;
     private float speed;
     protected GameObject attackTarget;
@@ -52,14 +59,21 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
 
     private void Start()
     {
-        if (isGuard)
+        if (isDummy)
         {
-            enemyState = EnemyStates.GUARD;
+            enemyState = EnemyStates.DUMMY;
         }
         else
         {
-            enemyState = EnemyStates.PATROL;
-            GetNewWayPoint();
+            if (isGuard)
+            {
+                enemyState = EnemyStates.GUARD;
+            }
+            else
+            {
+                enemyState = EnemyStates.PATROL;
+                GetNewWayPoint();
+            }
         }
         //FIXME:³¡¾°ÇÐ»»ºóÐÞ¸Äµô
         GameManager.Instance.AddObserver(this);
@@ -85,9 +99,21 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
             isDead = true;
         if (!playerDead)
         {
-            SwitchStates();
-            SwitchAnimation();
-            lastAttackTime -= Time.deltaTime;
+            if (isDummy)
+            {
+                anim.SetBool("Walk", false);
+                anim.SetBool("Chase", false);
+                anim.SetBool("Follow", false);
+                anim.SetBool("Critical", characterStats.isCritical);
+                anim.SetBool("Death", isDead);
+                SwitchStates();
+            }
+            else
+            {
+                SwitchStates();
+                SwitchAnimation();
+                lastAttackTime -= Time.deltaTime;
+            }
         }
     }
 

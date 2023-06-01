@@ -106,7 +106,12 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 anim.SetBool("Follow", false);
                 anim.SetBool("Critical", characterStats.isCritical);
                 anim.SetBool("Death", isDead);
-                SwitchStates();
+                if (isDead)
+                {
+                    coll.enabled = false;
+                    agent.radius = 0;
+                    Destroy(gameObject, 2f);
+                }
             }
             else
             {

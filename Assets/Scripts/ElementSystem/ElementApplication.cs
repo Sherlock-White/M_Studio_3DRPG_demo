@@ -6,24 +6,31 @@ public class ElementApplication : MonoBehaviour
 {
     private List<Element> elementList = new List<Element>();
 
-    public bool CreateAttackElementApplication(Element.ElementType type, Element.ElementCategory category)
+    public Element CreateAttackElementApplication(string key, Const.ElementType type, Const.ElementCategory category)
     {
         bool enableAttachDescend = true;
-        Element element = new Element(type, category, enableAttachDescend);
+        Element element = new Element(key, type, category, enableAttachDescend);
         if (element == null)
         {
-            return false;
+            return null;
         }
         // ¿ªÊ¼Ë¥¼õ
         StartCoroutine(element.NaturalDescendElement());
         elementList.Add(element);
         element.onDisappear += RemoveElementApplication;
-        return true;
+        return element;
     }
 
     public void RemoveElementApplication(Element element)
     {
+        StopCoroutine(element.NaturalDescendElement());
         elementList.Remove(element);
+        ElementManager.Instance.RemoveKey(element.key);
         element.onDisappear -= RemoveElementApplication;
+    }
+
+    public List<Element> GetElementList()
+    {
+        return elementList;
     }
 }

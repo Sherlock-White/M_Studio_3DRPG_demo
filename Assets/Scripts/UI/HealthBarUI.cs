@@ -29,15 +29,10 @@ public class HealthBarUI : MonoBehaviour
     {
         cam = Camera.main.transform;
 
-        foreach(Canvas canvas in FindObjectsOfType<Canvas>())
-        {
-            if(canvas.renderMode == RenderMode.WorldSpace)
-            {
-                UIBar = Instantiate(healthUIPrefab, canvas.transform).transform;
-                healtSlider = UIBar.GetChild(0).GetComponent<Image>();
-                UIBar.gameObject.SetActive(alwaysVisible);
-            }
-        }
+        GameObject canvas = GameObject.Find("HealthBarCanvas");
+        UIBar = Instantiate(healthUIPrefab, canvas.transform).transform;
+        healtSlider = UIBar.GetChild(0).GetComponent<Image>();
+        UIBar.gameObject.SetActive(alwaysVisible);
     }
 
     private void UpdateHealthBar(int currentHealth,int maxHealth)

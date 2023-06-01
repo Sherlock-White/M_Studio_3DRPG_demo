@@ -5,56 +5,93 @@ using UnityEngine.UI;
 
 public class ElementBarUI : MonoBehaviour
 {
-    public GameObject weakElement;
-    public GameObject strongElement;
-    public GameObject exStrongElement;
+    public GameObject templatePrefab;
+    private GameObject weakElement;
+    private GameObject strongElement;
+    private GameObject exStrongElement;
+    private Transform pool;
     private Transform currentAmountBar;
+    private Transform barPoint;
     private Element element;
+
+    private void Awake()
+    {
+        weakElement = transform.Find("WeakElement").gameObject;
+        strongElement = transform.Find("StrongElement").gameObject;
+        exStrongElement = transform.Find("ExStrongElement").gameObject;
+        pool = GameObject.Find("ElementPool").transform;
+    }
 
     private void OnEnable()
     {
         element.onAmountChanged += RefreshAmount;
-        element.onDisappear += RemoveElementUI;
+        element.onDisappear += ReturnToPool;
     }
 
-    public void SetElementUIType(Element.ElementType type)
+    private void OnDisable()
     {
-        switch (type)
+        element.onAmountChanged -= RefreshAmount;
+        element.onDisappear -= ReturnToPool;
+    }
+
+    private void LateUpdate()
+    {
+        if (gameObject.activeSelf)
         {
-            case Element.ElementType.WEAK:
-                weakElement.SetActive(true);
-                currentAmountBar = weakElement.transform.GetChild(1);
-                strongElement.SetActive(false);
-                exStrongElement.SetActive(false);
-                break;
-            case Element.ElementType.STRONG:
-                weakElement.SetActive(false);
-                strongElement.SetActive(true);
-                currentAmountBar = strongElement.transform.GetChild(1);
-                exStrongElement.SetActive(false);
-                break;
-            case Element.ElementType.EX_STRONG:
-                weakElement.SetActive(false);
-                strongElement.SetActive(false);
-                exStrongElement.SetActive(true);
-                currentAmountBar = exStrongElement.transform.GetChild(1);
-                break;
+            transform.position = barPoint.position;
+            transform.forward = -Camera.main.transform.forward;
         }
     }
 
-
-
-    public void RefreshAmount(float amount, Element.ElementType type)
+    private GameObject GetActiveElement(Const.ElementType type)
     {
-        Image fillImage = currentAmountBar.GetComponent<Image>();
-        if (fillImage == null) return;
-        fillImage.fillAmount = amount / Element.GetInitialAmount(type);
+        switch (type)
+        {
+            case Const.ElementType.WEAK:
+                return weakElement;
+            case Const.ElementType.STRONG:
+                return strongElement;
+            case Const.ElementType.EX_STRONG:
+                return exStrongElement;
+            default:
+                Debug.LogError("invalid type input");
+                return null;
+        }
     }
 
-    public void RemoveElementUI(Element element)
+    public void SetupElementUI(Element element, GameObject target)
     {
-        // TODO: ÔªËØÏûÊ§ºóÒÆ³ýUI
-        this.element.onDisappear -= RemoveElementUI;
-        this.element.onAmountChanged -= RefreshAmount;
+        this.element = element;
+        weakElement.SetActive(false);
+        strongElement.SetActive(false);
+        exStrongElement.SetActive(false);
+        GameObject activeElement = GetActiveElement(element.type);
+        if (activeElement)
+        {
+            activeElement.SetActive(true);
+            currentAmountBar = activeElement.transform.GetChild(1);
+            Image fillImage = currentAmountBar.GetComponent<Image>();
+            fillImage.color = element.GetElementColor();
+        }
+        barPoint = target.transform.Find("elementBarPoint");
+        transform.position = barPoint.position;
+    }
+
+    public void RefreshAmount(Element element, float amount, Const.ElementType type)
+    {
+        if(this.element.key == element.key)
+        {
+            Image fillImage = currentAmountBar.GetComponent<Image>();
+            if (fillImage == null) return;
+            fillImage.fillAmount = amount / Element.GetInitialAmount(type);
+        }
+    }
+
+    public void ReturnToPool(Element element)
+    {
+        if(this.element.key == element.key)
+        {
+            transform.SetParent(pool);
+        }
     }
 }

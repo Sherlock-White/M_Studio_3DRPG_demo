@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public List<Button> elementButtons;
+    private Const.ElementType cacheType = Const.ElementType.NULL;
+    private Const.ElementCategory cacheCategory = Const.ElementCategory.NULL;
+    private Button cacheButton = null;
 
     private void Awake()
     {
@@ -20,11 +23,27 @@ public class HUD : MonoBehaviour
 
     public void OnElementChanged(Button button, Const.ElementCategory category, Const.ElementType type)
     {
-        foreach(Button btn in elementButtons)
+        if(button == cacheButton)
         {
-            btn.transform.Find("selected").gameObject.SetActive(false);
+            button.transform.Find("selected").gameObject.SetActive(false);
+            ElementManager.Instance.curType = Const.ElementType.NULL;
+            ElementManager.Instance.curCategory = Const.ElementCategory.NULL;
+            cacheType = Const.ElementType.NULL;
+            cacheCategory = Const.ElementCategory.NULL;
+            cacheButton = null;
         }
-        Transform selected = button.transform.Find("selected");
-        selected.gameObject.SetActive(true);
+        else
+        {
+            if(cacheButton != null)
+            {
+                cacheButton.transform.Find("selected").gameObject.SetActive(false);
+            }
+            button.transform.Find("selected").gameObject.SetActive(true);
+            ElementManager.Instance.curType = type;
+            ElementManager.Instance.curCategory = category;
+            cacheType = type;
+            cacheCategory = category;
+            cacheButton = button;
+        }
     }
 }

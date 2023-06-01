@@ -6,6 +6,10 @@ public class ElementManager : Singleton<ElementManager>
 {
     private Dictionary<string, bool> keyMap = new Dictionary<string, bool>();
     private ElementCavasUI elementCanvasUI;
+    [HideInInspector]
+    public Const.ElementType curType = Const.ElementType.NULL;
+    [HideInInspector]
+    public Const.ElementCategory curCategory = Const.ElementCategory.NULL;
 
 
     public bool AddKey(string key)

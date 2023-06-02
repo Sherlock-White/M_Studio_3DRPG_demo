@@ -117,10 +117,10 @@ public class SceneController : Singleton<SceneController>,IEndGameObserver
 
     public void EndNotify()
     {
-        if (fadeFinished)
-        {
-            fadeFinished = false;
-            StartCoroutine(LoadMain());
-        }
+        //if (fadeFinished)
+        //{
+        //    fadeFinished = false;
+        //    StartCoroutine(LoadMain());
+        //}
     }
 }

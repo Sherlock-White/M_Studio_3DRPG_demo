@@ -102,6 +102,8 @@ public class CharacterStats : MonoBehaviour
         if(weapon.weaponPrefab != null)
         {
             Instantiate(weapon.weaponPrefab,weaponSlot);
+            Transform root = GameObject.Find("UI").transform;
+            root.Find("HUD").gameObject.SetActive(true);
         }
         attackData.ApplyWeaponData(weapon.weaponData);
         GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
@@ -119,6 +121,8 @@ public class CharacterStats : MonoBehaviour
         attackData.ApplyWeaponData(baseAttackData);
         //TODO£ºÇÐ»»¶¯»­
         GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
+        Transform root = GameObject.Find("UI").transform;
+        root.Find("HUD").gameObject.SetActive(false);
     }
 
     #endregion

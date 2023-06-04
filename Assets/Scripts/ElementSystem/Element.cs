@@ -48,7 +48,25 @@ public class Element
 
     public Color GetElementColor()
     {
-        return Const.ElementColor[(int)category];
+        switch (category)
+        {
+            case Const.ElementCategory.FIRE:
+                return new Color((float)239 / 255, (float)76 / 255, (float)56 / 255 , 1);
+            case Const.ElementCategory.WATER:
+                return new Color((float)3 / 255, (float)165 / 255, (float)255 / 255, 1);
+            case Const.ElementCategory.WIND:
+                return new Color((float)86 / 255, (float)227 / 255, (float)193 / 255, 1);
+            case Const.ElementCategory.ROCK:
+                return new Color((float)231 / 255, (float)181 / 255, (float)56 / 255, 1);
+            case Const.ElementCategory.ICE:
+                return new Color((float)151 / 255, (float)223 / 255, (float)231 / 255, 1);
+            case Const.ElementCategory.THUNDER:
+                return new Color((float)187 / 255, (float)119 / 255, (float)237 / 255, 1);
+            case Const.ElementCategory.GRASS:
+                return new Color((float)118 / 255, (float)218 / 255, (float)42 / 255, 1);
+            default:
+                return Color.gray;
+        }
     }
 
     public void ConsumeAmount(float value)

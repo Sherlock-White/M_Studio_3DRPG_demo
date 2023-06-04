@@ -363,7 +363,6 @@ MonoBehaviour:
   weakElement: {fileID: 5850201723531522598}
   strongElement: {fileID: 7223552282465898596}
   exStrongElement: {fileID: 4277910427764179809}
-  pool: {fileID: 0}
 --- !u!1 &4277910427764179809
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08759117, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3398025846563516058}
   - component: {fileID: 3398025846563516133}
   - component: {fileID: 3398025846563516132}
-  - component: {fileID: 2881599734606233523}
+  - component: {fileID: 6000694131071527201}
   m_Layer: 5
   m_Name: ElementCanvas
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3398025846563516132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2881599734606233523
+--- !u!114 &6000694131071527201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3398025846563516135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5dbe1cf07206b468ac6cfbe2dccf4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 872766b3df7ef514db94a306fb74f73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   preloadCount: 20

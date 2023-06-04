@@ -25,7 +25,6 @@ public class Element
         {
             amount *= 0.8f;
         }
-        amount = GetInitialAmount(type);
         time = 7 + 2.5f * amount;
         speed = amount / time;
     }

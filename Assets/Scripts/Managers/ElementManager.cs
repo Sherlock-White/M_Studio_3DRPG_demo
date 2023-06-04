@@ -11,7 +11,6 @@ public class ElementManager : Singleton<ElementManager>
     [HideInInspector]
     public Const.ElementCategory curCategory = Const.ElementCategory.NULL;
 
-
     public bool AddKey(string key)
     {
         if (keyMap.ContainsKey(key))
@@ -43,26 +42,29 @@ public class ElementManager : Singleton<ElementManager>
     {
         base.Awake();
         DontDestroyOnLoad(this);
-        GameObject elementCanvas = GameObject.Find("ElementCanvas");
-        elementCanvasUI = elementCanvas.GetComponent<ElementCavasUI>();
-        if(elementCanvas == null)
-        {
-            elementCanvas.AddComponent<ElementCavasUI>();
-        }
     }
 
+    private void Start()
+    {
+        GameObject elementCanvas = GameObject.Find("UI/ElementCanvas");
+        elementCanvasUI = elementCanvas.GetComponent<ElementCavasUI>();
+        if (elementCanvas == null)
+        {
+            elementCanvasUI = elementCanvas.AddComponent<ElementCavasUI>();
+        }
+    }
     public void CreateElementApplication(Const.ElementType type, Const.ElementCategory category, GameObject target)
     {
         ElementApplication elementComponent = target.GetComponent<ElementApplication>();
         if(elementComponent == null)
         {
-            target.AddComponent<ElementApplication>();
+            elementComponent = target.AddComponent<ElementApplication>();
         }
         bool res = false;
         string key = "";
         while (!res)
         {
-            key = string.Format("%s_%d_%d", target.name, (int)type, (int)category, Random.Range(0, 100));
+            key = string.Format("{0}_{1}_{2}_{3}", target.name, (int)type, (int)category, Random.Range(0, 100));
             res = AddKey(key);
         }
         Element element = elementComponent.CreateAttackElementApplication(key, type, category);

@@ -95,13 +95,13 @@ public class SceneController : Singleton<SceneController>,IEndGameObserver
         SceneFader fade = Instantiate(sceneFaderPrefab);
         if(scene != "")
         {
-            yield return StartCoroutine(fade.FadeOut(2f));
+            yield return StartCoroutine(fade.FadeOut(0.5f));
             yield return SceneManager.LoadSceneAsync(scene);
             yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);
             
             SaveManager.Instance.SavePlayerData();
             InventoryManager.Instance.SaveData();
-            yield return StartCoroutine(fade.FadeIn(1f));
+            yield return StartCoroutine(fade.FadeIn(0.5f));
             yield break;
         }
     }
@@ -109,9 +109,9 @@ public class SceneController : Singleton<SceneController>,IEndGameObserver
     IEnumerator LoadMain()
     {
         SceneFader fade = Instantiate(sceneFaderPrefab);
-        yield return StartCoroutine(fade.FadeOut(1f));
+        yield return StartCoroutine(fade.FadeOut(0.5f));
         yield return SceneManager.LoadSceneAsync("Main");
-        yield return StartCoroutine(fade.FadeIn(1f));
+        yield return StartCoroutine(fade.FadeIn(0.5f));
         yield break;
     }
 

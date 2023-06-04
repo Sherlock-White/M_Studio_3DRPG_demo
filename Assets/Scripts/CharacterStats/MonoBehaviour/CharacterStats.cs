@@ -12,6 +12,9 @@ public class CharacterStats : MonoBehaviour
     private AttackData_SO baseAttackData;
     private RuntimeAnimatorController baseAnimator;
 
+    [HideInInspector]
+    public bool enableElement = false;
+
     [Header("Weapon")]
     public Transform weaponSlot;
 
@@ -104,6 +107,7 @@ public class CharacterStats : MonoBehaviour
             Instantiate(weapon.weaponPrefab,weaponSlot);
             Transform root = GameObject.Find("UI").transform;
             root.Find("HUD").gameObject.SetActive(true);
+            enableElement = true;
         }
         attackData.ApplyWeaponData(weapon.weaponData);
         GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
@@ -123,6 +127,7 @@ public class CharacterStats : MonoBehaviour
         GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
         Transform root = GameObject.Find("UI").transform;
         root.Find("HUD").gameObject.SetActive(false);
+        enableElement = false;
     }
 
     #endregion

@@ -88,6 +88,15 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Critical", characterStats.isCritical);
             anim.SetTrigger("Attack");
+            if (GameManager.Instance.playerStats.enableElement)
+            {
+                Const.ElementType type = ElementManager.Instance.curType;
+                Const.ElementCategory category = ElementManager.Instance.curCategory;
+                if (type != Const.ElementType.NULL && category != Const.ElementCategory.NULL)
+                {
+                    ElementManager.Instance.CreateElementApplication(type, category, attackTarget);
+                }
+            }
             //reset attack CD
             lastAttackTime = characterStats.attackData.coolDown;
         }
@@ -113,6 +122,4 @@ public class PlayerController : MonoBehaviour
             targetStats.TakeDamage(characterStats, targetStats);
         }
     }
-
-
 }

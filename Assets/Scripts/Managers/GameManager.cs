@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
     public CharacterStats playerStats;
     private CinemachineFreeLook followCamera;
+    private Slider slider;
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
 
@@ -25,6 +27,12 @@ public class GameManager : Singleton<GameManager>
             followCamera.Follow = playerStats.transform.GetChild(2);
             followCamera.LookAt = playerStats.transform.GetChild(2);
         }
+    }
+
+    public void RigisterSlider(Slider slider)
+    {
+        this.slider = slider;
+        slider.onValueChanged.AddListener(OnTimescaleChanged);
     }
 
     public void AddObserver(IEndGameObserver observer)
@@ -53,5 +61,10 @@ public class GameManager : Singleton<GameManager>
                 return item.transform;
         }
         return null;
+    }
+
+    public void OnTimescaleChanged(float value)
+    {
+        Debug.Log(value);
     }
 }
